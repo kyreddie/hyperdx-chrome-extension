@@ -1,13 +1,13 @@
 # HyperDX Chrome Extension
 
-Inject [@hyperdx/browser](https://github.com/hyperdxio/hyperdx-js) into any website for local RUM debugging and session replay — similar to the [Grafana Faro Chrome plugin](https://github.com/erikwennerberg/grafana-faro-chrome-plugin).
+Inject [@hyperdx/browser](https://github.com/hyperdxio/hyperdx-js) into any website for local RUM debugging and session replay.
 
 The SDK is bundled locally (~480KB) so it works on pages with strict Content Security Policy (no dependency on unpkg at runtime).
 
 ## Requirements
 
 - Google Chrome or Chromium-based browser (Edge, Brave, etc.)
-- HyperDX ingestion endpoint (cloud or self-hosted), if you want telemetry to be stored
+- HyperDX / OTLP ingestion endpoint (cloud or self-hosted), if you want telemetry to be stored
 
 ## Install (unpacked / developer mode)
 
@@ -26,6 +26,22 @@ The extension should appear as **HyperDX Browser Extension**.
 3. Optionally set **API Key** — required for HyperDX Cloud; leave empty for some self-hosted setups.
 4. Optionally set **Collector URL** — default cloud endpoint is `https://in-otel.hyperdx.io`.
 5. Toggle **Only inject on matching URLs** if you want to limit which sites are instrumented.
+
+6. If optionally sending to an Otel collector you can run the collector locally via Docker with the following command. Replace variables {{CLICKHOUSE_ENDPOINT}} and {{CLICKHOUSE_PASSWORD}}
+
+   ```bash
+export CLICKHOUSE_ENDPOINT={{CLICKHOUSE_ENDPOINT}}
+export CLICKHOUSE_PASSWORD={{CLICKHOUSE_PASSWORD}}
+
+docker run \
+  -e CLICKHOUSE_ENDPOINT=${CLICKHOUSE_ENDPOINT} \
+  -e CLICKHOUSE_USER=default \
+  -e CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD} \
+  -p 8080:8080 \
+  -p 4317:4317 \
+  -p 4318:4318 \
+  clickhouse/clickstack-otel-collector:latest
+```
 
 ### URL pattern examples
 
