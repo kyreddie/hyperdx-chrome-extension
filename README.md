@@ -29,7 +29,7 @@ The extension should appear as **HyperDX Browser Extension**.
 
 6. If optionally sending to an Otel collector you can run the collector locally via Docker with the following command. Replace variables {{CLICKHOUSE_ENDPOINT}} and {{CLICKHOUSE_PASSWORD}}
 
-   ```bash
+```bash
 export CLICKHOUSE_ENDPOINT={{CLICKHOUSE_ENDPOINT}}
 export CLICKHOUSE_PASSWORD={{CLICKHOUSE_PASSWORD}}
 
