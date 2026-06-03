@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>HyperDX Browser Extension</title>
+    <link rel="stylesheet" href="css/popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>HyperDX Browser Extension</h1>
+      <p class="subtitle">Inject HyperDX RUM into any page for local debugging.</p>
+
+      <div class="toggle-container">
+        <label class="switch">
+          <input type="checkbox" id="enableHyperDX" checked />
+          <span class="slider round"></span>
+        </label>
+        <span class="toggle-label">Enable HyperDX Monitoring</span>
+      </div>
+
+      <form id="hyperdxConfigForm">
+        <div class="form-group">
+          <label for="service">Service Name</label>
+          <input type="text" id="service" placeholder="my-frontend-app" required />
+        </div>
+
+        <div class="form-group">
+          <label for="apiKey">API Key (optional)</label>
+          <input type="password" id="apiKey" placeholder="Leave empty for local / self-hosted collectors" autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+          <label for="url">Collector URL (optional)</label>
+          <input type="text" id="url" placeholder="https://in-otel.hyperdx.io" />
+        </div>
+
+        <div class="form-group">
+          <label for="environment">Environment (optional)</label>
+          <input type="text" id="environment" placeholder="development" />
+        </div>
+
+        <div class="form-group">
+          <label for="traceTargets">Trace Propagation Targets (optional)</label>
+          <input
+            type="text"
+            id="traceTargets"
+            placeholder="/api\\.myapp\\.domain/i, /localhost/i"
+          />
+          <span class="hint">Comma-separated JavaScript regex patterns</span>
+        </div>
+
+        <div class="toggle-container url-filter-toggle">
+          <label class="switch">
+            <input type="checkbox" id="urlFilterEnabled" />
+            <span class="slider round"></span>
+          </label>
+          <span class="toggle-label">Only inject on matching URLs</span>
+        </div>
+
+        <div class="form-group" id="urlPatternsGroup">
+          <label for="urlPatterns">URL patterns</label>
+          <textarea
+            id="urlPatterns"
+            rows="4"
+            placeholder="http://homedepot.com/*&#10;*://*.homedepot.com/*&#10;https://localhost:3000/*"
+          ></textarea>
+          <span class="hint">One pattern per line (or comma-separated). Use * as wildcard.</span>
+        </div>
+
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="consoleCapture" />
+            Capture console logs
+          </label>
+          <label>
+            <input type="checkbox" id="advancedNetworkCapture" />
+            Advanced network capture
+          </label>
+        </div>
+
+        <button type="submit" id="saveConfig">Save Configuration</button>
+      </form>
+    </div>
+    <script src="js/urlPatterns.js"></script>
+    <script src="js/popup.js"></script>
+  </body>
+</html>
