@@ -36,7 +36,7 @@ For background on session replay and how it fits into ClickStack, see the [Sessi
 
 ## Running the demo {#running-the-demo}
 
-<Steps>
+<VerticalStepper headerLevel="h3">
 
 ### Clone the extension repository {#clone-extension}
 
@@ -58,10 +58,16 @@ The extension appears in your toolbar as **HyperDX Browser Extension**.
 
 If you already have a ClickStack or HyperDX ingestion endpoint, skip to [Configure the extension](#configure-extension).
 
-For a local ClickStack stack, start the OpenTelemetry collector:
+For a local ClickStack stack, start the OpenTelemetry collector. Replace `{{CLICKHOUSE_ENDPOINT}}` and `{{CLICKHOUSE_PASSWORD}}` with your ClickHouse connection details:
 
 ```shell
+export CLICKHOUSE_ENDPOINT={{CLICKHOUSE_ENDPOINT}}
+export CLICKHOUSE_PASSWORD={{CLICKHOUSE_PASSWORD}}
+
 docker run \
+  -e CLICKHOUSE_ENDPOINT=${CLICKHOUSE_ENDPOINT} \
+  -e CLICKHOUSE_USER=default \
+  -e CLICKHOUSE_PASSWORD=${CLICKHOUSE_PASSWORD} \
   -p 8080:8080 \
   -p 4317:4317 \
   -p 4318:4318 \
@@ -114,7 +120,7 @@ You should see your session listed with its duration and event count. Click the 
 
 Switch between **Highlighted** and **All Events** modes to adjust the level of detail on the timeline.
 
-</Steps>
+</VerticalStepper>
 
 ## URL filtering {#url-filtering}
 
